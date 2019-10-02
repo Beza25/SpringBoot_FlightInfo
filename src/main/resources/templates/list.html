@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <header th:insert="base :: header"></header>
+    <style>
+        body {
+            background: url("https://res.cloudinary.com/drpyvuhac/image/upload/v1570041046/GettyImages-912360406_uacret.jpg");
+            background-size: cover;
+        }
+
+        .jumbotron {
+            background-color: rgba(255 255 255 0.6);
+        }
+
+    </style>
+</head>
+<body>
+<nav th:replace="base :: navlinks"></nav>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Flight List</h1>
+        <br/>
+        <a class="btn btn-primary" href="/add" role="button">Add Flight</a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Airline</th>
+                <th scope="col">Date</th>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col">Price</th>
+                <td scope="col">Action</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each = "flightInfo : ${flightInfos}">
+                <td th:text="${flightInfo.airline}"></td>
+                <td th:text="${#dates.format(flightInfo.date, 'dd-MMM-yyyy')}"></td>
+                <td th:text="${flightInfo.fromAirport}"></td>
+                <td th:text="${flightInfo.toAirprot}"></td>
+                <td th:text="${flightInfo.price}"></td>
+                <td>
+                    <a class="btn btn-outline-primary"  th:href="@{/update/{id}(id=${flightInfo.id})}" role="button"  >Update</a>
+                    <a class="btn btn-outline-success" th:href="@{/detail/{id}(id=${flightInfo.id})}" role="button"   >Details</a>
+                    <a class="btn btn-outline-danger" th:href="@{/delete/{id}(id=${flightInfo.id})}" role="button"  >Delete</a>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<footer th:insert="base :: footer"></footer>
+<div th:insert="base :: scripts"></div>
+</body>
+</html>

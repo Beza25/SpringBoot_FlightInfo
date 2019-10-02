@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <header th:insert="base :: header"></header>
+    <style>
+        body {
+            background: url("https://res.cloudinary.com/drpyvuhac/image/upload/v1570041046/GettyImages-912360406_uacret.jpg");
+            background-size: cover;
+        }
+
+        .jumbotron {
+            background-color: rgba(255 255 255 0.6);
+        }
+
+    </style>
+</head>
+<body>
+<nav th:replace="base :: navlinks"></nav>
+<div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Search List</h1>
+        <div th:each = "flight : ${flights}">
+            <p th:text="${flight.airline}"></p>
+            <p th:text="${#dates.format(flight.date,'dd-MMM-yyy')}"></p>
+            <p th:text="${flight.fromAirport}"></p>
+            <p th:text="${flight.toAirprot}"></p>
+            <p th:text="${flight.price}"></p>
+        </div>
+
+    </div>
+</div>
+
+<footer th:insert="base :: footer"></footer>
+<div th:insert="base :: scripts"></div>
+</body>
+</html>
